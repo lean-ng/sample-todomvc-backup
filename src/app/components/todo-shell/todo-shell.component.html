@@ -1,7 +1,7 @@
 <section class="todoapp">
   <header class="header">
     <h1>todos</h1>
-    <todo-input></todo-input>
+    <todo-input (create)="createTodo($event)"></todo-input>
   </header>
   <todo-main [todos]="state.todos"></todo-main>
   <todo-toolbar></todo-toolbar>

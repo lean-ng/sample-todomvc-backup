@@ -15,7 +15,7 @@ export class TodoShellComponent implements OnInit {
   // mutieren und keinesfalls neu setzen auf dem State (zum Beispiel beim
   // Löschen über die filter-Methode).
   //
-  // Da ich insgesamt eine Immutable-Strategie schon jetzt anstrebe ist die
+  // Da ich insgesamt eine Immutable-Strategie jetztschon  anstrebe ist die
   // bessere Option die public-Injektion und das weitergeben der todos-Property
   // ohne lokale Kopie der Referenz
 
@@ -24,4 +24,7 @@ export class TodoShellComponent implements OnInit {
   ngOnInit() {
   }
 
+  createTodo(title: string) {
+    this.state.createTodo(title);
+  }
 }
