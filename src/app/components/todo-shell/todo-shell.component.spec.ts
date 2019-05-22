@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoShellComponent } from './todo-shell.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('TodoShellComponent', () => {
   let component: TodoShellComponent;
@@ -8,7 +9,8 @@ describe('TodoShellComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TodoShellComponent ]
+      declarations: [ TodoShellComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
