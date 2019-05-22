@@ -6,6 +6,7 @@ import { TodoShellComponent } from './components/todo-shell/todo-shell.component
 import { TodoMainComponent } from './components/todo-main/todo-main.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoToolbarComponent } from './components/todo-toolbar/todo-toolbar.component';
+import { TodoInputComponent } from './components/todo-input/todo-input.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { TodoToolbarComponent } from './components/todo-toolbar/todo-toolbar.com
     TodoShellComponent,
     TodoMainComponent,
     TodoListComponent,
-    TodoToolbarComponent
+    TodoToolbarComponent,
+    TodoInputComponent
   ],
   imports: [
     BrowserModule
