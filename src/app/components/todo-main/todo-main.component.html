@@ -1,5 +1,5 @@
 <section class="main" [ngClass]="{ hidden: isListEmpty }">
   <input id="toggle-all" class="toggle-all" type="checkbox">
   <label for="toggle-all">Mark all as complete</label>
-  <todo-list></todo-list>
+  <todo-list [todos]="todos"></todo-list>
 </section>

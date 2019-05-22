@@ -2,7 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoMainComponent } from './todo-main.component';
 import { By } from '@angular/platform-browser';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, Component, Input } from '@angular/core';
+import { Todo } from 'src/app/models/todo';
+
+@Component({
+  selector: 'todo-list',
+  template: '<div>List</div>'
+})
+class MockTodoListComponent {
+  @Input()
+  todos: Todo[];
+}
 
 describe('TodoMainComponent', () => {
   let component: TodoMainComponent;
@@ -10,7 +20,7 @@ describe('TodoMainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TodoMainComponent ],
+      declarations: [ TodoMainComponent, MockTodoListComponent ],
       schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
@@ -34,5 +44,15 @@ describe('TodoMainComponent', () => {
     fixture.detectChanges();
 
     expect(mainSection.classList.contains('hidden')).toBeTruthy();
+  });
+
+  it('should set the todo list input property', () => {
+
+    const listComponent = fixture.debugElement.query(By.directive(MockTodoListComponent));
+    component.todos = [ { id: 1, title: 'yeeaah', completed: false} ];
+
+    fixture.detectChanges();
+
+    expect(listComponent.componentInstance.todos).toBe(component.todos);
   });
 });
