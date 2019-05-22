@@ -2,18 +2,12 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'todo-input',
-  templateUrl: './todo-input.component.html',
-  styleUrls: ['./todo-input.component.css']
+  templateUrl: './todo-input.component.html'
 })
-export class TodoInputComponent implements OnInit {
+export class TodoInputComponent {
 
   @Output()
   create = new EventEmitter<string>();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   createTodo(title: string) {
     this.create.emit(title);
