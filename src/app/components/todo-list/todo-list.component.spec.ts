@@ -2,14 +2,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoListComponent } from './todo-list.component';
 import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
   let fixture: ComponentFixture<TodoListComponent>;
 
+  const listItemQuery = By.css('ul.todo-list li');
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TodoListComponent ]
+      declarations: [ TodoListComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
@@ -26,7 +30,6 @@ describe('TodoListComponent', () => {
 
   it('should render zero list items on empty todo list', () => {
 
-    const listItemQuery = By.css('ul.todo-list li');
 
     component.todos = [];
     fixture.detectChanges();
@@ -34,4 +37,16 @@ describe('TodoListComponent', () => {
     expect(fixture.debugElement.queryAll(listItemQuery).length).toBe(0);
   });
 
+  it('should correctly sets/removes the `completed` class', () => {
+
+    component.todos = [{ id: -1, title: 'Test Completed', completed: false }];
+    fixture.detectChanges();
+
+    expect(fixture.debugElement.query(listItemQuery).classes.completed).toBeFalsy();
+
+    component.todos[0].completed = true;
+    fixture.detectChanges();
+
+    expect(fixture.debugElement.query(listItemQuery).classes.completed).toBeTruthy();
+  });
 });
