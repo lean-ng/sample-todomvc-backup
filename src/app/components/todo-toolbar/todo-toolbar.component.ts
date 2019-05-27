@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Todo } from 'src/app/models/todo';
+import { StateService } from 'src/app/services/state.service';
 
 @Component({
   selector: 'todo-toolbar',
@@ -8,20 +9,23 @@ import { Todo } from 'src/app/models/todo';
 })
 export class TodoToolbarComponent implements OnInit {
 
-  @Input()
+  // Die Komponente verfügt jetzt über keine Inputs mehr. Nach
+  // einer Änderung der ChangeDetection-Strategie muss entsprechend
+  // hier aufgebessert werden.
+
   todos: Todo[];
 
   // Hoppla, Redundanz! (siehe todo-main)
   //
-  // Lösung: entweder Logik auf dem State implementieren und diesen als
-  // Input herunterreichen (wie tief soll das gehen?). Oder die Komponente
-  // später reaktiv auf State-Änderungen programmieren.
+  // Lösung: Logik auf dem State implementieren
 
   get isListEmpty() {
     return !this.todos || this.todos.length === 0;
   }
 
-  constructor() { }
+  constructor(private state: StateService) {
+    this.todos = state.todos;
+  }
 
   ngOnInit() {
   }
