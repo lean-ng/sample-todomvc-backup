@@ -58,4 +58,32 @@ describe('TodoItemComponent', () => {
 
     expect(stateServiceMock.toggleTodoState).toHaveBeenCalledWith(mockTodo);
   });
+
+  it('deleting a todo via instance should fire the event', (done) => {
+
+    const todoToDelete = { id: 17, title: 'To Delete', completed: false };
+
+    component.removeTodo.subscribe( (todo) => {
+      expect(todo).toBe(todoToDelete);
+      done();
+    });
+
+    component.todo = todoToDelete;
+    component.remove();
+  });
+
+  it('deleting a todo via DOM should fire the event', (done) => {
+
+    const todoToDelete = { id: 17, title: 'To Delete', completed: false };
+    component.todo = todoToDelete;
+
+    component.removeTodo.subscribe( (todo) => {
+      expect(todo).toBe(todoToDelete);
+      done();
+    });
+
+    const deleteBtnDE = fixture.debugElement.query(By.css('.destroy'));
+    deleteBtnDE.triggerEventHandler('click', {});
+  });
+
 });

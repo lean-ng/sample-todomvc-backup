@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from 'src/app/models/todo';
 import { StateService } from 'src/app/services/state.service';
 
@@ -12,6 +12,9 @@ export class TodoItemComponent implements OnInit {
   @Input()
   todo: Todo;
 
+  @Output()
+  removeTodo = new EventEmitter<Todo>();
+
   constructor(private state: StateService) { }
 
   ngOnInit() {
@@ -19,5 +22,9 @@ export class TodoItemComponent implements OnInit {
 
   toggleState() {
     this.state.toggleTodoState(this.todo);
+  }
+
+  remove() {
+    this.removeTodo.emit(this.todo);
   }
 }
