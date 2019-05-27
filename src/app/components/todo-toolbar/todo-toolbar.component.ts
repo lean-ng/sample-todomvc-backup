@@ -23,6 +23,10 @@ export class TodoToolbarComponent implements OnInit {
     return !this.todos || this.todos.length === 0;
   }
 
+  get activeCount() {
+    return this.todos.reduce( (count, t) => t.completed ? count : count + 1, 0);
+  }
+
   constructor(private state: StateService) {
     this.todos = state.todos;
   }
