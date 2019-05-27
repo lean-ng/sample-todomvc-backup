@@ -11,6 +11,9 @@ export class StateService {
   constructor() { }
 
   createTodo(title: string) {
+    // Achtung: das Array wird hier nur mutiert - also lediglich ein
+    // neues Element angehangen. Probleme werden kommen mit Änderung
+    // der ChangeDetection-Strategie.
     this.todos.push({ id: -1, title, completed: false });
   }
 
