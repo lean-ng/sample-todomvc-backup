@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { TodoShellComponent } from './todo-shell.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('TodoShellComponent', () => {
   let component: TodoShellComponent;

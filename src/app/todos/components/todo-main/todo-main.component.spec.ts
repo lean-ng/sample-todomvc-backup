@@ -1,9 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TodoMainComponent } from './todo-main.component';
-import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA, Component, Input } from '@angular/core';
-import { Todo } from 'src/app/models/todo';
+import { By } from '@angular/platform-browser';
+import { Todo } from '../../models/todo';
+import { TodoMainComponent } from './todo-main.component';
 
 @Component({
   selector: 'todo-list',

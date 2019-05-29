@@ -1,10 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TodoListComponent } from './todo-list.component';
-import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA, Component, Input, Output, EventEmitter } from '@angular/core';
-import { Todo } from 'src/app/models/todo';
-import { StateService } from 'src/app/services/state.service';
+import { By } from '@angular/platform-browser';
+import { Todo } from '../../models/todo';
+import { TodoListComponent } from './todo-list.component';
+import { StateService } from '../../services/state.service';
 
 @Component({
   selector: 'todo-item',

@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TodoToolbarComponent } from './todo-toolbar.component';
 import { By } from '@angular/platform-browser';
-import { StateService } from 'src/app/services/state.service';
+import { TodoToolbarComponent } from './todo-toolbar.component';
+import { StateService } from '../../services/state.service';
 
 describe('TodoToolbarComponent', () => {
   let component: TodoToolbarComponent;
