@@ -22,4 +22,10 @@ export class StateService {
     // problematisch herausstellen
     todo.completed = !todo.completed;
   }
+
+  deleteTodo(todo: Todo) {
+    // Achtung: gleiches wie oben - nur Mutation. Und dazu eine sehr Old-School Implementierung.
+    const ix = this.todos.indexOf(todo);
+    this.todos.splice(ix, 1);
+  }
 }

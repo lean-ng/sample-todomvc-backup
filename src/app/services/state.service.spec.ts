@@ -21,5 +21,18 @@ describe('StateService', () => {
     it('should have todos porperty', () => {
       expect(service.todos).toBeDefined();
     });
+
+    it('should have a method to create new todos', () => {
+      expect(service.createTodo).toBeDefined();
+    });
+
+    it('should have a method to toggle the todo state', () => {
+      expect(service.toggleTodoState).toBeDefined();
+    });
+
+    it('should have a method to delete a todo', () => {
+      expect(service.deleteTodo).toBeDefined();
+    });
+
   });
 });
