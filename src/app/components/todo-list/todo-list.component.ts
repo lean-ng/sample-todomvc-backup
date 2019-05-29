@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Todo } from 'src/app/models/todo';
+import { StateService } from 'src/app/services/state.service';
 
 @Component({
   selector: 'todo-list',
@@ -11,9 +12,12 @@ export class TodoListComponent implements OnInit {
   @Input()
   todos: Todo[];
 
-  constructor() { }
+  constructor(private state: StateService) { }
 
   ngOnInit() {
   }
 
+  removeTodo(todo: Todo) {
+    this.state.deleteTodo(todo);
+  }
 }

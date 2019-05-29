@@ -13,7 +13,7 @@ export class TodoItemComponent implements OnInit {
   todo: Todo;
 
   @Output()
-  removeTodo = new EventEmitter<Todo>();
+  removeTodo = new EventEmitter<void>();
 
   constructor(private state: StateService) { }
 
@@ -25,6 +25,6 @@ export class TodoItemComponent implements OnInit {
   }
 
   remove() {
-    this.removeTodo.emit(this.todo);
+    this.removeTodo.emit();
   }
 }
