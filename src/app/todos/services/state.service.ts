@@ -15,12 +15,6 @@ export class StateService implements State, Actions {
     this.store.getAll().then( todos => { this.todos = todos });
   }
 
-  deleteTodo(todo: Todo) {
-    // Achtung: gleiches wie oben - nur Mutation. Und dazu eine sehr Old-School Implementierung.
-    const ix = this.todos.indexOf(todo);
-    this.todos.splice(ix, 1);
-  }
-
   async createTodo(title: string) {
     const todo = await this.store.create(title);
     this.todos = [ ...this.todos, todo ];
@@ -47,5 +41,4 @@ export class StateService implements State, Actions {
     await Promise.all(this.todos.filter(t => t.completed).map(t => this.store.remove(t.id)));
     this.todos = this.todos.filter(t => !t.completed);
   }
-
 }

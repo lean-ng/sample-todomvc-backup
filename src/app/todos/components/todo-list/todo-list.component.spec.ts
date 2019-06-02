@@ -13,13 +13,6 @@ class TodoItemMockComponent {
 
   @Input()
   todo: Todo;
-
-  @Output()
-  removeTodo = new EventEmitter<Todo>();
-
-  remove() {
-    this.removeTodo.emit(this.todo);
-  }
 }
 
 describe('TodoListComponent', () => {
@@ -67,16 +60,5 @@ describe('TodoListComponent', () => {
     fixture.detectChanges();
 
     expect(fixture.debugElement.query(listItemQuery).classes.completed).toBeTruthy();
-  });
-
-  it('should listen on the delete request and call the state in the handler', () => {
-
-    const mockTodo = { id: -1, title: 'Test Completed', completed: false };
-    component.todos = [ mockTodo ];
-    fixture.detectChanges();
-
-    fixture.debugElement.query(By.directive(TodoItemMockComponent)).triggerEventHandler('removeTodo', mockTodo);
-
-    expect(stateServiceMock.deleteTodo).toHaveBeenCalledWith(mockTodo);
   });
 });

@@ -12,19 +12,16 @@ export class TodoItemComponent implements OnInit {
   @Input()
   todo: Todo;
 
-  @Output()
-  removeTodo = new EventEmitter<void>();
-
-  constructor(private state: StateService) { }
+  constructor(private actions: StateService) { }
 
   ngOnInit() {
   }
 
   toggleState() {
-    this.state.toggleTodoState(this.todo);
+    this.actions.toggleTodoState(this.todo);
   }
 
   remove() {
-    this.removeTodo.emit();
+    this.actions.removeTodo(this.todo);
   }
 }

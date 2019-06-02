@@ -9,7 +9,7 @@ describe('TodoItemComponent', () => {
   let component: TodoItemComponent;
   let fixture: ComponentFixture<TodoItemComponent>;
 
-  let stateServiceMock = jasmine.createSpyObj('StateService', ['toggleTodoState']);
+  let stateServiceMock = jasmine.createSpyObj('StateService', ['toggleTodoState', 'removeTodo']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -56,32 +56,28 @@ describe('TodoItemComponent', () => {
     const checkboxDE = fixture.debugElement.query(By.css('.toggle'));
     checkboxDE.triggerEventHandler('change', {});
 
-    expect(stateServiceMock.toggleTodoState).toHaveBeenCalled();
+    expect(stateServiceMock.toggleTodoState).toHaveBeenCalledWith(mockTodo);
   });
 
-  it('deleting a todo via instance should fire the event', (done) => {
+  it('deleting a todo should call the actions service', () => {
 
     const todoToDelete = { id: 17, title: 'To Delete', completed: false };
-
-    component.removeTodo.subscribe( () => {
-      done();
-    });
 
     component.todo = todoToDelete;
     component.remove();
+
+    expect(stateServiceMock.removeTodo).toHaveBeenCalledWith(todoToDelete);
   });
 
-  it('deleting a todo via DOM should fire the event', (done) => {
+  it('deleting a todo via DOM call the actions service', () => {
 
     const todoToDelete = { id: 17, title: 'To Delete', completed: false };
     component.todo = todoToDelete;
 
-    component.removeTodo.subscribe( () => {
-      done();
-    });
-
     const deleteBtnDE = fixture.debugElement.query(By.css('.destroy'));
     deleteBtnDE.triggerEventHandler('click', {});
+
+    expect(stateServiceMock.removeTodo).toHaveBeenCalledWith(todoToDelete);
   });
 
 });
