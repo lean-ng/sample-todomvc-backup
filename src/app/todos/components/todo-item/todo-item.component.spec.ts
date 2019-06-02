@@ -2,19 +2,19 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { TodoItemComponent } from './todo-item.component';
-import { StateService } from '../../services/state.service';
 import { Todo } from '../../models/todo';
+import { ACTIONS, Actions } from '../../services/interfaces/actions.interface';
 
 describe('TodoItemComponent', () => {
   let component: TodoItemComponent;
   let fixture: ComponentFixture<TodoItemComponent>;
 
-  let stateServiceMock = jasmine.createSpyObj('StateService', ['toggleTodoState', 'removeTodo']);
+  let actionsMock: Actions = jasmine.createSpyObj('Actions', ['toggleTodoState', 'removeTodo']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TodoItemComponent ],
-      providers: [{ provide: StateService, useValue: stateServiceMock }]
+      providers: [{ provide: ACTIONS, useValue: actionsMock }]
     })
     .compileComponents();
   }));
@@ -56,7 +56,7 @@ describe('TodoItemComponent', () => {
     const checkboxDE = fixture.debugElement.query(By.css('.toggle'));
     checkboxDE.triggerEventHandler('change', {});
 
-    expect(stateServiceMock.toggleTodoState).toHaveBeenCalledWith(mockTodo);
+    expect(actionsMock.toggleTodoState).toHaveBeenCalledWith(mockTodo);
   });
 
   it('deleting a todo should call the actions service', () => {
@@ -66,7 +66,7 @@ describe('TodoItemComponent', () => {
     component.todo = todoToDelete;
     component.remove();
 
-    expect(stateServiceMock.removeTodo).toHaveBeenCalledWith(todoToDelete);
+    expect(actionsMock.removeTodo).toHaveBeenCalledWith(todoToDelete);
   });
 
   it('deleting a todo via DOM call the actions service', () => {
@@ -77,7 +77,7 @@ describe('TodoItemComponent', () => {
     const deleteBtnDE = fixture.debugElement.query(By.css('.destroy'));
     deleteBtnDE.triggerEventHandler('click', {});
 
-    expect(stateServiceMock.removeTodo).toHaveBeenCalledWith(todoToDelete);
+    expect(actionsMock.removeTodo).toHaveBeenCalledWith(todoToDelete);
   });
 
 });

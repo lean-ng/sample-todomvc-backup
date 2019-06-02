@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { Todo } from '../../models/todo';
-import { StateService } from '../../services/state.service';
+import { Actions, ACTIONS } from '../../services/interfaces/actions.interface';
 
 @Component({
   selector: 'todo-item',
@@ -12,7 +12,7 @@ export class TodoItemComponent implements OnInit {
   @Input()
   todo: Todo;
 
-  constructor(private actions: StateService) { }
+  constructor(@Inject(ACTIONS) private actions: Actions) { }
 
   ngOnInit() {
   }
