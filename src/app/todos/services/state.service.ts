@@ -12,7 +12,7 @@ export class StateService implements State, Actions {
   todos: Todo[] = [];
 
   constructor(private store: LocalStoreService) {
-    this.store.getAll().then( todos => { this.todos = todos });
+    this.store.getAll().then( todos => { this.todos = todos; });
   }
 
   async createTodo(title: string) {
