@@ -44,4 +44,34 @@ describe('TodoInputComponent', () => {
     inputFieldDE.nativeElement.value = 'Test';
     inputFieldDE.triggerEventHandler('keyup.enter', {});
   });
+
+  it('should trim the entered title', (done) => {
+
+    component.create.subscribe( (ev) => {
+      expect(ev).toBe('Space Around');
+      done();
+    });
+
+    component.createTodo('  Space Around  ');
+  });
+
+  it('should not accept an empty title', () => {
+
+    spyOn(component.create, 'emit');
+
+    component.createTodo('  ');
+    component.createTodo('');
+
+    expect(component.create.emit).not.toHaveBeenCalled();
+  });
+
+  it('should clear the input field after entering', () => {
+
+    const inputFieldDE = fixture.debugElement.query(By.css('input'));
+
+    inputFieldDE.nativeElement.value = 'Test';
+    inputFieldDE.triggerEventHandler('keyup.enter', {});
+
+    expect(inputFieldDE.nativeElement.value).toBe('');
+  });
 });

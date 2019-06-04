@@ -10,6 +10,8 @@ export class TodoInputComponent {
   create = new EventEmitter<string>();
 
   createTodo(title: string) {
-    this.create.emit(title);
+    if ( title.trim().length > 0) {
+      this.create.emit(title.trim());
+    }
   }
 }
