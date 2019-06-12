@@ -56,5 +56,12 @@ describe('Angular TodoMVC', () => {
       cy.get('.new-todo').type('Empty field after{enter}');
       cy.get('.new-todo').should('have.value', '');
     });
+
+    it('should show the main and footer sections', () => {
+      cy.get('.new-todo').type('E2E Testing{enter}');
+      cy.get('.main').should('not.have.class', 'hidden');
+      cy.get('.footer').should('not.have.class', 'hidden');
+    });
+
   });
 });

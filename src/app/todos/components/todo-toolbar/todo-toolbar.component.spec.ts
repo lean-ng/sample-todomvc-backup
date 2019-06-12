@@ -12,7 +12,7 @@ describe('TodoToolbarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TodoToolbarComponent ],
-      providers: [ {provide: StateService, useValue: state} ]
+      providers: [ {provide: StateService, useFactory: () => state} ]
     })
     .compileComponents();
   }));
@@ -33,8 +33,8 @@ describe('TodoToolbarComponent', () => {
     expect(toolbarFooter.classList.contains('hidden')).toBeTruthy();
   });
 
-  it('should show the toolbar footer if there are todos in the list', () => {
-    component.todos.push({ id: 17, title: 'Toolbar', completed: false });
+  it('should show the toolbar footer if there are todos in the state', () => {
+    state.todos = [...state.todos, { id: 17, title: 'Toolbar', completed: false }];
     fixture.detectChanges();
     const toolbarFooter: HTMLElement = fixture.debugElement.query(By.css('footer.footer')).nativeElement;
     expect(toolbarFooter.classList.contains('hidden')).toBeFalsy();
