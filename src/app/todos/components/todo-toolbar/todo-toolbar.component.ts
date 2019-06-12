@@ -22,7 +22,7 @@ export class TodoToolbarComponent implements OnInit {
   //    public state oder einen getter für die todos-Property)
   // b) State umstellen auf Observables
 
-  todos: Todo[];
+  get todos(): Todo[] { return this.state.todos; }
 
   // Hoppla, Redundanz! (siehe todo-main)
   //
@@ -37,7 +37,6 @@ export class TodoToolbarComponent implements OnInit {
   }
 
   constructor(private state: StateService) {
-    this.todos = state.todos;
   }
 
   ngOnInit() {
