@@ -12,6 +12,8 @@ export class TodoItemComponent implements OnInit {
   @Input()
   todo: Todo;
 
+  editMode = false;
+
   constructor(@Inject(ACTIONS) private actions: Actions) { }
 
   ngOnInit() {
@@ -23,5 +25,9 @@ export class TodoItemComponent implements OnInit {
 
   remove() {
     this.actions.removeTodo(this.todo);
+  }
+
+  beginEdit() {
+    this.editMode = true;
   }
 }

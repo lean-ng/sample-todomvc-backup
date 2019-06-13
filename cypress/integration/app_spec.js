@@ -34,6 +34,16 @@ describe('Angular TodoMVC', () => {
       cy.get('.todo-list li').should('have.length', 1);
     });
 
+    it('should append the new todo at the list end', () => {
+      cy.get('.new-todo').type('E2E Testing{enter}');
+      cy.get('.todo-list li').last().contains('E2E Testing');
+      cy.get('.new-todo').type('Unit Testing{enter}');
+      cy.get('.todo-list li').last().contains('Unit Testing');
+      cy.get('.new-todo').type('CI and CD{enter}');
+      cy.get('.todo-list li').first().contains('E2E Testing');
+      cy.get('.todo-list li').last().contains('CI and CD');
+    });
+
     it('should persist the todos', () => {
       cy.get('.new-todo').type('E2E Testing{enter}');
       cy.get('.new-todo').type('Unit Testing{enter}');
@@ -61,6 +71,52 @@ describe('Angular TodoMVC', () => {
       cy.get('.new-todo').type('E2E Testing{enter}');
       cy.get('.main').should('not.have.class', 'hidden');
       cy.get('.footer').should('not.have.class', 'hidden');
+    });
+  });
+
+  describe('modifying items / deleting items', () => {
+
+    beforeEach(() => {
+      cy.visit('/');
+      cy.get('.new-todo').type('E2E Testing{enter}');
+      cy.get('.new-todo').type('Unit Testing{enter}');
+    });
+
+    it('should allow me to mark items as complete', () => {
+      cy.get('input.toggle').first().check();
+      cy.get('.todo-list li').first().should('have.class','completed');
+      cy.get('.todo-list li').last().should('not.have.class','completed');
+      cy.get('input.toggle').last().check();
+      cy.get('.todo-list li').last().should('have.class','completed');
+    });
+
+    it('should allow me to mark items as complete', () => {
+      cy.get('input.toggle').first().check();
+      cy.get('.todo-list li').first().should('have.class','completed');
+      cy.get('.todo-list li').last().should('not.have.class','completed');
+      cy.get('input.toggle').last().check();
+      cy.get('.todo-list li').last().should('have.class','completed');
+    });
+
+    it('should allow me to delete items', () => {
+      cy.get('button.destroy').first().click({force: true});
+      cy.get('.todo-list li').should('have.length', 1);
+      cy.get('button.destroy').first().click({force: true});
+      cy.get('.todo-list li').should('have.length', 0);
+    });
+
+    it('should allow me to enter edit mode', () => {
+      cy.get('.view label').first().dblclick();
+      cy.get('.todo-list li').first().should('have.class', 'editing');
+    });
+  });
+
+  describe('editing items', () => {
+
+    beforeEach(() => {
+      cy.visit('/');
+      cy.get('.new-todo').type('E2E Testing{enter}');
+      cy.get('.new-todo').type('Unit Testing{enter}');
     });
 
   });
