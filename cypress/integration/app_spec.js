@@ -3,7 +3,7 @@ describe('Angular TodoMVC', () => {
   describe('when page is initially opened', () => {
 
     it('should focus on the todo input field', () => {
-      cy.visit('http://localhost:4200/');
+      cy.visit('/');
       cy.focused().should('have.class','new-todo');
     });
 
@@ -12,13 +12,13 @@ describe('Angular TodoMVC', () => {
   describe('with no todos', () => {
 
     it('should hide the main and footer sections', () => {
-      cy.visit('http://localhost:4200/');
+      cy.visit('/');
       cy.get('.main').should('have.class', 'hidden');
       cy.get('.footer').should('have.class', 'hidden');
     });
 
     it('should have an empty todo list', () => {
-      cy.visit('http://localhost:4200/');
+      cy.visit('/');
       cy.get('.todo-list li').should('have.length', 0);
     });
   });
@@ -26,7 +26,7 @@ describe('Angular TodoMVC', () => {
   describe('when entering new todos', () => {
 
     beforeEach(() => {
-      cy.visit('http://localhost:4200/');
+      cy.visit('/');
     });
 
     it('should me allow to enter a new todo', () => {
