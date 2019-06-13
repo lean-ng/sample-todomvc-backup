@@ -34,23 +34,6 @@ describe('Angular TodoMVC', () => {
       cy.get('.todo-list li').should('have.length', 1);
     });
 
-    it('should append the new todo at the list end', () => {
-      cy.get('.new-todo').type('E2E Testing{enter}');
-      cy.get('.todo-list li').last().contains('E2E Testing');
-      cy.get('.new-todo').type('Unit Testing{enter}');
-      cy.get('.todo-list li').last().contains('Unit Testing');
-      cy.get('.new-todo').type('CI and CD{enter}');
-      cy.get('.todo-list li').first().contains('E2E Testing');
-      cy.get('.todo-list li').last().contains('CI and CD');
-    });
-
-    it('should persist the todos', () => {
-      cy.get('.new-todo').type('E2E Testing{enter}');
-      cy.get('.new-todo').type('Unit Testing{enter}');
-      cy.reload();
-      cy.get('.todo-list li').should('have.length', 2);
-    });
-
     it('should not allow to enter an empty todo', () => {
       cy.get('.new-todo').type('{enter}');
       cy.get('.new-todo').type('   {enter}');
@@ -71,6 +54,23 @@ describe('Angular TodoMVC', () => {
       cy.get('.new-todo').type('E2E Testing{enter}');
       cy.get('.main').should('not.have.class', 'hidden');
       cy.get('.footer').should('not.have.class', 'hidden');
+    });
+
+    it('should append the new todo at the list end', () => {
+      cy.get('.new-todo').type('E2E Testing{enter}');
+      cy.get('.todo-list li').last().contains('E2E Testing');
+      cy.get('.new-todo').type('Unit Testing{enter}');
+      cy.get('.todo-list li').last().contains('Unit Testing');
+      cy.get('.new-todo').type('CI and CD{enter}');
+      cy.get('.todo-list li').first().contains('E2E Testing');
+      cy.get('.todo-list li').last().contains('CI and CD');
+    });
+
+    it('should persist the todos', () => {
+      cy.get('.new-todo').type('E2E Testing{enter}');
+      cy.get('.new-todo').type('Unit Testing{enter}');
+      cy.reload();
+      cy.get('.todo-list li').should('have.length', 2);
     });
   });
 
@@ -117,6 +117,7 @@ describe('Angular TodoMVC', () => {
       cy.visit('/');
       cy.get('.new-todo').type('E2E Testing{enter}');
       cy.get('.new-todo').type('Unit Testing{enter}');
+      cy.get('.view label').last().dblclick();
     });
 
   });
