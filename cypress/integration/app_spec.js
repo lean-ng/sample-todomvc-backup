@@ -120,5 +120,8 @@ describe('Angular TodoMVC', () => {
       cy.get('.view label').last().dblclick();
     });
 
+    it('should initially show me the current title', () => {
+      cy.get('input.edit').last().should('have.value', 'Unit Testing');
+    });
   });
 });

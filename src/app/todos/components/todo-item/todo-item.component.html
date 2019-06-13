@@ -5,5 +5,5 @@
     <label (dblclick)="beginEdit()">{{ todo.title }}</label>
     <button class="destroy" (click)="remove()"></button>
   </div>
-  <input class="edit" value="Rule the web">
+  <input class="edit" [value]="todo.title">
 </li>
