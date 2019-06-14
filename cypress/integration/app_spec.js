@@ -118,10 +118,51 @@ describe('Angular TodoMVC', () => {
       cy.get('.new-todo').type('E2E Testing{enter}');
       cy.get('.new-todo').type('Unit Testing{enter}');
       cy.get('.view label').last().dblclick();
+      cy.wait(100);
+    });
+
+    it('should focus the input', () => {
+      cy.focused().should('have.class', 'edit');
     });
 
     it('should initially show me the current title', () => {
       cy.get('input.edit').last().should('have.value', 'Unit Testing');
+    });
+
+    it('should hide other controls when editing', () => {
+      cy.get('.view label').last().should('be.hidden');
+      cy.get('.view .toggle').last().should('be.hidden');
+    });
+
+    it('should save edits on enter and leave edit mode', () => {
+      cy.get('input.edit').last().clear().type('CI and CD{enter}').then(() => {
+        cy.get('.view label').last().contains('CI and CD');
+        cy.get('.todo-list li').last().should('not.have.class', 'editing');
+      });
+    });
+
+    it('should save edits on blur', () => {
+      cy.get('input.edit').last().clear().type('CI and CD').blur();
+      cy.get('.view label').last().contains('CI and CD');
+      cy.get('.todo-list li').last().should('not.have.class', 'editing');
+    });
+
+    it('should trim entered text', () => {
+      cy.get('input.edit').last().clear().type('    Testing {enter}').then( () => {
+        cy.get('.view label').last().should('have.html', 'Testing');
+      });
+    });
+
+    it('should remove the item if an empty text string was entered', () => {
+      cy.get('input.edit').last().clear().type('{enter}');
+      cy.get('.todo-list li').should('have.length', 1);
+    });
+
+    it('should cancel edits on escape', () => {
+      cy.get('input.edit').last().type('edited{esc}').then(() => {
+        cy.get('.view label').last().should('have.html', 'Unit Testing');
+        cy.get('.todo-list li').last().should('not.have.class', 'editing');
+      });
     });
   });
 });

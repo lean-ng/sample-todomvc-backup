@@ -13,6 +13,7 @@ export class TodoItemComponent implements OnInit {
   todo: Todo;
 
   editMode = false;
+  editText = '';
 
   constructor(@Inject(ACTIONS) private actions: Actions) { }
 
@@ -29,5 +30,20 @@ export class TodoItemComponent implements OnInit {
 
   beginEdit() {
     this.editMode = true;
+    this.editText = this.todo.title;
+  }
+
+  cancelEdit() {
+    this.editMode = false;
+  }
+
+  commitEdit() {
+    const title = this.editText.trim();
+    if (title.length === 0) {
+      this.remove();
+    } else {
+      this.todo.title = title;
+    }
+    this.editMode = false;
   }
 }

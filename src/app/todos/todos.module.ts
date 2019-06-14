@@ -8,6 +8,7 @@ import { TodoInputComponent } from './components/todo-input/todo-input.component
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { ACTIONS } from './services/interfaces/actions.interface';
 import { StateService } from './services/state.service';
+import { FocusedOnDirective } from './directives/focused-on.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { StateService } from './services/state.service';
     TodoListComponent,
     TodoToolbarComponent,
     TodoInputComponent,
-    TodoItemComponent
+    TodoItemComponent,
+    FocusedOnDirective
   ],
   imports: [
     CommonModule
